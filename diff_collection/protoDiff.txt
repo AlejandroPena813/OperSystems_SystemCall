@@ -1,0 +1,13 @@
+9a10,19
+> /* Alejandro Project1 */
+> int proc_Log(int);
+> int ex_time(void);
+> int pid_forkTime(int);
+> void reset_proBuff(void);
+> int retuBuffSize(void);
+> int retu_plogPID(int);
+> int retu_plogIndex(int);
+> 
+> 
+58a69
+> int do_printmsg(void);

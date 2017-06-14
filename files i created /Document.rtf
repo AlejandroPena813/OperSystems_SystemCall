@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Alejandro Pena\
+ufID:3712-3113\
+COP4600\
+Project 1\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc\partightenfactor0
+
+\b \cf0 \ul \ulc0 IMPORTANT NOTES:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \ulnone To compile and run test function: i put makefile and pr1_test.c into /root. I then type \'93make\'94 which will 	produce an executable call \'93test\'94, to run the executable type \'93./test <val>\'94 where val is a 	number 0-5: 0 for stop_plog; 1 for start_plog; 2 for reset_plog; 3 for get_plog_size; 4 for 	get_plog_byPID; and 5 for get_plog_byindex. An example, to start plog \'93./test 1\'94 .\
+\
+About man file: the man file called \'93procLog.1\'94 should be located in /usr/src/man/man1. To run the 	man file you must be in /usr/src/man/man1 and then type \'93man ./procLog.1\'94 .\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc\partightenfactor0
+
+\b \cf0 \ul \ulc0 Diff file directories and their designated files\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \ulnone fork_exitDiff.txt:	/usr/src/servers/pm/forkexit.c
+\b \ul  \
+
+\b0 \ulnone tableDiff.txt:	/usr/src/servers/pm/table.c\
+callnrDiff.txt:	/usr/src/include/minix/callnr.h\
+protoDiff.txt:	/usr/src/servers/pm/proto.h\
+pmMakeDiff.txt: /usr/src/servers/pm/Makefile\
+unistdDiff.txt:	/usr/src/include/unistd.h\
+libcMakeDiff.txt:	/usr/src/lib/libc/sys-minix/Makefile.inc\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc\partightenfactor0
+
+\b \cf0 \ul \ulc0 System Call and Library Functions implementations\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \ulnone system call file directory: /usr/src/servers/pm/project1.c\
+library function file directory: /usr/src/lib/libc/sys-minix/pr1_lib.c\
+\
+The first step to creating my system call was to go to /usr/src/servers/pm/table.c and add my system call proc_Log to the table of system calls. I then went to /usr/src/include/minix/callnr.h and added the system call name to the list of macro definitions, PROC_LOG can now be called from a test file or library function using the Minix function _syscall. In /usr/src/servers/pm/proto.h i defined the prototype of my system call as well as the prototype of other helper functions that aid my system call in implementing the library functionalities. The most important change is done within /usr/src/servers/pm/forkexit.c, for it contains do_time which is a Minix library function to update a time variable in do_fork and do_exit, for fork and exit i also included two helper functions which get the PID. In /usr/src/servers/pm/project1.c i implemented my system call,it\'92s helpers and global variables. project1.c has a struct which have 3 variables the fork and exit times, and PID; i then created a buffer array which is of size 1024 that will store the buffer struct types; then using helper functions and the updated pointer values from do_time i retrieve the PID, fork time, and exit time and store them into the buffer; i can toggle when my helper functions located fork and exit listen and record or dont; then with the buffer and its elements i can do things with helper functions to do things such as return the buffer size, clear the buffer, get time values according to pid or index; these system call and the helpers are guided by messages passed through the library functions. In /usr/src/servers/pm/Makefile i include my system call file to be compiled. Within /usr/src/lib/libc/sys-minix/pr1_lib.c i implemented my 6 library functions, they all work by sending at least 1 message value which guides the system call to do the rest of the work; get_plog_byPID and get_plog_byindex are a bit tricker for they have extra message values: one message value sends the pid or index int values whose time we want; they then receive 2 message values to get the fork and exit times to pass to the pointers. Within /usr/src/include/unistd.h i define the prototypes for my 6 library functions. Finally, I include my library functions file into /usr/src/lib/libc/sys-minix/Makefile.inc to be compiled.\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc\partightenfactor0
+
+\b \cf0 \ul \ulc0 Testing \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \ulnone To test my program i call my executable test file along with one of 6 values:0-5 as described above. I first must enter 1 to start my process log recording, which then exits test execution to allow for me to enter processes like \'93ls\'94. After creating a few processes can then perform all library functions by running my test executable with the other 5 values to do things like print, reset, or retrieve process times. Finally, i can enter the executable and 0 to stop recording processes.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qc\partightenfactor0
+
+\b \cf0 \ul \ulc0 Bugs\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\b0 \cf0 \ulnone The only known bug is that size returns 1 less than it should. Also, i typically stop the process log so i can get a proper size, otherwise it keeps recording processes  and the size continually changes.\
+\
+\
+}

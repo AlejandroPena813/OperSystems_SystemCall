@@ -1,0 +1,13 @@
+115a116,123
+> 
+> //Alejandro Project1 
+> int childPid = rmc->mp_pid;
+> do_time();
+> pid_forkTime(childPid); //end of fork project1
+> 
+> 
+> 
+246a255,257
+> 
+> 	do_time();
+> 	ex_time();//Alejandro Project1

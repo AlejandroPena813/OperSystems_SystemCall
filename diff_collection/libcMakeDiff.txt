@@ -1,0 +1,4 @@
+18c18
+< 	sync.c syscall.c sysuname.c truncate.c umask.c unlink.c write.c \
+---
+> 	sync.c pr1_lib.c  printmsg.c  syscall.c sysuname.c truncate.c umask.c unlink.c write.c \

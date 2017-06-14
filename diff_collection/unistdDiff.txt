@@ -1,0 +1,9 @@
+148a149,156
+> /* Alejandro Test Tutorial Function, and proj lib functs*/
+> int printmsg(int val);
+> void start_plog(void);
+> void stop_plog(void);
+> void reset_plog(void);
+> int get_plog_size(void);
+> int get_plog_byPID(int pid, long* c_time, long* t_time);
+> int get_plog_byindex(int index, long* c_time, long* t_time);

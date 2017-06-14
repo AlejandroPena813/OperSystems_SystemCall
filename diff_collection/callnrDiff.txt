@@ -1,0 +1,6 @@
+45a46
+> #define PROC_LOG          44
+56a58
+> #define PRINTMSG          56
+57a60
+> #define EX_TIME           58

@@ -1,0 +1,31 @@
+procLog.1
+.SH NAME
+Process Log 
+.SH SYNOPSIS
+.B Process Log Buffer Controller
+.SH DESCRIPTION
+Message Values:
+	0: stop plog; 1: start plog; 2: reset plog; 3: plog size; 
+	4: plog time by pid; 5: plog time by index
+.SH ENVIRONMENT
+.TP 15n
+.B /usr/src/servers/pm/project1.c
+The path to knowledge.
+.SH FILES
+.TP 25n
+.B /usr/man/procLog.1 /root/pr1_test.c /usr/src/lib/libc/sys-minix/pr1_lib.c
+This file.
+.SH "SEE ALSO"
+.BR man (7).
+.SH DIAGNOSTICS
+man: No manual on template.
+.SH NOTES
+When running test program, enter values 0-5 with the test executable. For Example,
+"./Test 1" for start plog.
+.SH BUGS
+There is a bug with the size part of the system call, it shows 1 less than the
+actual size. Indexing also starts at 0, so if you wanna access the last 
+element, its index is size-1.
+
+.SH AUTHOR
+Alejandro Pena

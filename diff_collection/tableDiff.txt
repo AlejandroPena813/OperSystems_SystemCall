@@ -1,0 +1,12 @@
+58c58
+< 	no_sys,		/* 44 = unused	*/
+---
+> 	proc_Log,	/* 44 = proc_Log*/
+70c70
+< 	no_sys,		/* 56 = unused	*/
+---
+> 	do_printmsg,	/* 56 = printmsg*/
+72c72
+< 	no_sys,		/* 58 = unused	*/
+---
+> 	ex_time,	/* 58 = ex_time	*/
